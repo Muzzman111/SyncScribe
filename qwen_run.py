@@ -4,12 +4,12 @@ import subprocess
 import os
 
 ENDPOINT = "http://127.0.0.1:5001"
-LYRICS_DIR = r"C:\Users\nmuzz\Documents\Code\Python\Lyrics"
-LRC_SCRIPT = r"C:\Users\nmuzz\Documents\Code\Python\LRCLib_API.py"
-AUDIO_RIP_SCRIPT = r"C:\Users\nmuzz\Documents\Code\Python\youtubedlp rip script.py"
+LYRICS_DIR = r"./Lyrics"
+LRC_SCRIPT = r"./LRCLib_API.py"
+AUDIO_RIP_SCRIPT = r"./youtubedlp rip script.py"
 MP3_DIR = r"C:\Users\nmuzz\Music\with lrc"
-track_name = "M&M"
-artist_name = "Neton Vega"
+track_name = "el mayor de los ranas"
+artist_name = "Victor Valverde"
 
 def get_lyrics(artist, track, file_path):
     """Fetches only the synced lyrics from a local file or via an external script."""
