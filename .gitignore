@@ -1,6 +1,4 @@
 # Ignore the Testing and Junk directory
 Testing and Junk/
 
-# Ignore the Lyrics directory itself, but track its contents
-/Lyrics/*
-!/Lyrics/*.lrc
+Lyrics/
