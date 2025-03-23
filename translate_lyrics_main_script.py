@@ -16,9 +16,9 @@ LYRICS_DIR = MP3_DIR
 
 def get_arguments():
     parser = argparse.ArgumentParser(description="Parse track info and language to translate")
-    parser.add_argument('--artist', type=str, default="causer", help="Name of the artist.")
-    parser.add_argument('--track', type=str, default="error", help="Name of the track.")
-    parser.add_argument('--language', type=str, default="spanish", help="Language to translate from.")
+    parser.add_argument('--artist', type=str, default="grupo frontera ", help="Name of the artist.")
+    parser.add_argument('--track', type=str, default="un x100to", help="Name of the track.")
+    parser.add_argument('--language', type=str, default="", help="Language to translate from.")
     parser.add_argument('--retranslate', type=int, default=1, help="1 = retranslate always, 0 = use existing translation.")
     return parser.parse_args()
 
@@ -85,7 +85,7 @@ def translate_lyrics(lyrics, language):
     """Translates the provided lyrics into English while preserving timestamps."""
     prompt = (
         f"Translate the following {language} song lyrics into English. Preserve the timestamps and ensure accuracy. "
-        "Do not add any additional commentary. The output should end precisely when the song ends.\n\n"
+        "Do not add any additional commentary. The output should end precisely when the song ends and always be in English.\n\n"
     )
     payload = {
         "prompt": f"<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n{prompt}{lyrics}\n<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
@@ -110,7 +110,7 @@ def download_track(artist, track, language):
     """Downloads the track's MP3 if it doesn't already exist."""
     mp3_path = os.path.join(MP3_DIR, f"{artist} - {track}.mp3")
     if os.path.exists(mp3_path):
-        logging.info("Track already exists.")
+        logging.info("Track already exists, skipping download.")
         return
     try:
         result = subprocess.run(
