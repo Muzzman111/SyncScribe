@@ -6,7 +6,7 @@ import sys
 if sys.stdout.encoding.lower() != 'utf-8':
     sys.stdout.reconfigure(encoding='utf-8')
 
-music_dir = r"C:\Users\nmuzz\Music\with lrc" #just a default, the preferred dir is passed as an argument
+music_dir = os.path.expandvars(r"%userprofile%\Music\Music with LRC Files") #just a default, the preferred dir is passed as an argument
 yt_dlp_path = r"./yt-dlp.exe"
 override = None #allows you to choose which video to download
 # Set up argument parser with only artist and track as arguments

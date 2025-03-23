@@ -8,20 +8,19 @@ import threading
 ENDPOINT = "http://127.0.0.1:5001"  # koboldcpp LLM endpoint
 LRC_SCRIPT = r"./LRCLib_API.py"
 AUDIO_RIP_SCRIPT = r"./youtubedlp rip script.py"
-MP3_DIR = r"C:\Users\nmuzz\Music\with lrc"  # Destination for MP3 files
+MP3_DIR = os.path.expandvars(r"%userprofile%\Music\Music with LRC Files")   # Destination for MP3 files
 LYRICS_DIR = MP3_DIR #r"./Lyrics"  # Directory where original foreign language lyrics are stored
 
 def get_arguments():
     parser = argparse.ArgumentParser(description="Parse track info and language to translate")
     parser.add_argument('--artist', type=str, default="grupo frontera", help="Name of the artist.")
     parser.add_argument('--track', type=str, default="un x100to", help="Name of the track.")
-    parser.add_argument('--language', type=str, default="Spanish", help="Language to translate from.")
+    parser.add_argument('--language', type=str, default="", help="Language to translate from.")
     parser.add_argument('--retranslate', type=int, default=0, help="1 = retranslate always, 0 = use existing translation.")
     return parser.parse_args()
 
 def kobold_server_check():
     """Checks if the Kobold server is up and prints its version if available."""
-     # Try to fetch the version info from the kobold server
     try:
         response = requests.get(f"{ENDPOINT}/api/extra/version", timeout=5)
         if response.status_code == 200:
@@ -103,7 +102,7 @@ def process_lyrics(artist, track, language, retranslate):
     and translating (or reusing) the translated version.
     Returns a tuple (original_lyrics, translated_lyrics).
     """
-    # Ensure the Lyrics directory exists
+    # Ensure the directories exists
     if not os.path.exists(LYRICS_DIR):
         os.makedirs(LYRICS_DIR, exist_ok=True)
     
@@ -171,7 +170,6 @@ def main():
     if not kobold_server_check():
         print("No kobold server")
         return
-    
     args = get_arguments()
     artist = args.artist.lower()
     track = args.track.lower()
