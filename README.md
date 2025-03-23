@@ -13,7 +13,7 @@ This project downloads time-stamped, foreign language lyrics from the lrclib.net
 2. **Navigate to the Script Folder**  
    - Open your terminal and change directory into the project folder:  
      ```
-     cd *yourpath*/Lyric_Translator
+     cd *yourpath*/SyncScribe
      ```
 
 3. **Run the Script**  
@@ -34,7 +34,7 @@ This project downloads time-stamped, foreign language lyrics from the lrclib.net
 2. **Install Python Requirements**  
    - Change directory to the script folder:
      ```
-     cd *yourpath*/Lyric_Translator
+     cd *yourpath*/SyncScribe
      ```
    - Run the following command to install the required packages:
      ```
@@ -43,20 +43,16 @@ This project downloads time-stamped, foreign language lyrics from the lrclib.net
 
 ### Install Supporting Software
 
-1. **Download yt-dlp**  
-   - Get `yt-dlp.exe` for downloading MP3s from [yt-dlp releases](https://github.com/yt-dlp/yt-dlp/releases/).  
-   - Place the executable in the script directory: `*yourpath*/Lyric_Translator`.
+1. **Download Quod Libet**  
+   - Download the Quod Libet music player for displaying lyrics from [Quod Libet releases](https://github.com/quodlibet/quodlibet/releases/).  
+   - A portable installation is ideal; you can place it in the script directory or any location of your choice.
 
 2. **Download KoboldCPP**  
    - Download KoboldCPP for local LLM translation from [KoboldCPP releases](https://github.com/LostRuins/koboldcpp/releases/).  
    - Choose the `nocuda` version if you don’t have an NVIDIA GPU or the CUDA version if you do.  
    - Install KoboldCPP wherever you prefer.
 
-3. **Download Quod Libet**  
-   - Download the Quod Libet music player for displaying lyrics from [Quod Libet releases](https://github.com/quodlibet/quodlibet/releases/).  
-   - A portable installation is ideal; you can place it in the script directory or any location of your choice.
-
-4. **Download an AI Translation Model**  
+3. **Download a Large Language Model**
    - Get the translation model from [Qwen2.5-7B-Instruct on Hugging Face](https://huggingface.co/Qwen/Qwen2.5-7B-Instruct-GGUF/tree/main).  
    - Note: LLAMA 3 models may refuse translation due to violent content in song lyrics, but QWEN 2.5 7B works flawlessly.  
    - I used the Q5_k_m quantization and it worked well.  
@@ -78,7 +74,7 @@ This project downloads time-stamped, foreign language lyrics from the lrclib.net
      ```
 
 2. **Copy the Plugin File**  
-   - Copy the file `SynchronizedLyricsDualLanguage.py` from the Lyric_Translator folder into the events folder from the previous step.
+   - Copy the file `SynchronizedLyricsDualLanguage.py` from the SyncScribe folder into the events folder from the previous step.
 
 3. **Activate the Plugin**  
    - Open Quod Libet, navigate to **File > Plugins**, scroll down until you see "Synchronized Lyrics Dual Language," check the box, and close the dialog.  
