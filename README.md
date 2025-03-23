@@ -2,18 +2,19 @@
 
 ## Project Description
 
-This project downloads time-stamped, foreign language lyrics from the lrclib.net API, translates them into English using a local language model, and retrieves the corresponding MP3. The song can then be played in the Quod Libet music player with both the original and translated lyrics scrolling in sync. KoboldCPP runs QWEN 2.5 7B for translation, and yt-dlp is used to download the MP3.
+This project downloads time-stamped, foreign language lyrics for any song, translates them into English using a AI model, and retrieves the corresponding MP3 from Youtube. The song can then be played in the Quod Libet music player with both the original and translated lyrics scrolling in sync. The lrclib.net API is used to download the lyrics in an LRC format, KoboldCPP runs QWEN 2.5 7B for translation, and yt-dlp is used to download the MP3.
 
 ## Running the Script
 
-1. **Start KoboldCPP**  
-   - Click "Load" at the bottom of the window.  
-   - Load the model preset you created earlier and click "Launch".
+1. **Start KoboldCPP server**  
+   - Launch KoboldCPP and click "Load" at the bottom of the window. 
+   - Select your saved Kobold preset. (If you haven't set up a preset, refer to the "KoboldCPP Model Config" section.)
+   - Click "Launch" to load the model weights and start the server.
 
 2. **Navigate to the Script Folder**  
    - Open your terminal and change directory into the project folder:  
      ```
-     cd *yourpath*/SyncScribe
+     cd /SyncScribe
      ```
 
 3. **Run the Script**  
@@ -34,7 +35,7 @@ This project downloads time-stamped, foreign language lyrics from the lrclib.net
 2. **Install Python Requirements**  
    - Change directory to the script folder:
      ```
-     cd *yourpath*/SyncScribe
+     cd /SyncScribe
      ```
    - Run the following command to install the required packages:
      ```
@@ -64,17 +65,17 @@ This project downloads time-stamped, foreign language lyrics from the lrclib.net
 #### Quod Libet Dual Lyrics Plugin Config
 
 1. **Locate the Plugin Folder**  
-   - Open File Explorer and navigate to the Quod Libet plugin folder. For example:  
+   - Open File Explorer and navigate to the Quod Libet plugin folder. It is located at this path within the Quod Libet folder:  
      ```
-     *yourpath*\quodlibet-4.6.0-portable\data\lib\python3.11\site-packages\quodlibet\ext\events
+     \quodlibet-4.6.0-portable\data\lib\python3.11\site-packages\quodlibet\ext\events
      ```  
-     Or, if Quod Libet is in your Downloads folder:  
+     Or, if Quod Libet is in your Downloads folder, you can paste:  
      ```
      %userprofile%\Downloads\quodlibet-4.6.0-portable\data\lib\python3.11\site-packages\quodlibet\ext\events
      ```
 
 2. **Copy the Plugin File**  
-   - Copy the file `SynchronizedLyricsDualLanguage.py` from the SyncScribe folder into the events folder from the previous step.
+   - Copy the file `SynchronizedLyricsDualLanguage.py` from the SyncScribe folder into the events folder you opened in the previous step.
 
 3. **Activate the Plugin**  
    - Open Quod Libet, navigate to **File > Plugins**, scroll down until you see "Synchronized Lyrics Dual Language," check the box, and close the dialog.  
