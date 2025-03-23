@@ -20,8 +20,8 @@ def fetch_lyrics(artist, track):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Fetch lyrics from LRCLib API")
-    parser.add_argument("artist_name", nargs="?", default="Gabito Ballesteros", help="Artist name")
-    parser.add_argument("track_name", nargs="?", default="Presidente", help="Track name")
+    parser.add_argument("artist_name", nargs="?", default="Stromae", help="Artist name")
+    parser.add_argument("track_name", nargs="?", default="Alors On Danse", help="Track name")
     args = parser.parse_args()
     
     fetch_lyrics(args.artist_name, args.track_name)

@@ -1,1 +1,0 @@
-llama-server -m "H:\AI files\Qwen 2.5 7B\qwen2.5-7b-instruct-q5_k_m-00001-of-00002.gguf" -c 6096 --port 5001 -ngl 29 --mlock --threads 3 "eos_token_id": [128001, 128009] --verbose
