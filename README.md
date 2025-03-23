@@ -75,7 +75,7 @@ This project downloads time-stamped, foreign language lyrics for any song, trans
      ```
 
 2. **Copy the Plugin File**  
-   - Copy the file `SynchronizedLyricsDualLanguage.py` from the SyncScribe folder into the events folder you opened in the previous step.
+   - Copy "SynchronizedLyricsDualLanguage.py" from the quod_libet_plugin/ folder into the events folder you opened in the previous step.
 
 3. **Activate the Plugin**  
    - Open Quod Libet, navigate to **File > Plugins**, scroll down until you see "Synchronized Lyrics Dual Language," check the box, and close the dialog.  

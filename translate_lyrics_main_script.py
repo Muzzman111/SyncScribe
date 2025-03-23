@@ -7,7 +7,7 @@ import threading
 
 ENDPOINT = "http://127.0.0.1:5001"  # koboldcpp LLM endpoint
 LRC_SCRIPT = r"./LRCLib_API.py"
-AUDIO_RIP_SCRIPT = r"./youtubedlp rip script.py"
+AUDIO_RIP_SCRIPT = r"./youtubedlp_rip_script.py"
 MP3_DIR = os.path.expandvars(r"%userprofile%\Music\Music with LRC Files")   # Destination for MP3 files
 LYRICS_DIR = MP3_DIR #r"./Lyrics"  # Directory where original foreign language lyrics are stored
 
