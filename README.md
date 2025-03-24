@@ -14,7 +14,8 @@ This project downloads time-stamped foreign language lyrics for any song, transl
 2. **Prepare the CSV File with Song Details**  
    - Open the music_data.csv file using Excel, Google Sheets, or your preferred spreadsheet tool.
    - Enter the details for each song you wish to download and translate
-   - Ensure that all necessary fields are filled out for each song. Any missing artist or track will be skipped automatically.
+   - Note: English songs can be downloaded too. Translation will be automatically skipped if you fill out the language column of the csv with "english"
+   - Any song missing the artist or track name will be skipped.
 
 3. **Run the Script**  
    - Execute the script with the following command if you are using the music_data csv file:
@@ -106,3 +107,13 @@ This project downloads time-stamped foreign language lyrics for any song, transl
 5. **Save Preset**  
    - Click "Save Preset" at the bottom of the KoboldCPP window and save the configuration in the same folder as your model.  
    - This allows you to load the preset for future sessions without reconfiguring everything.
+
+### Troubleshooting
+
+**Error Downloading Lyrics**
+- Most of the time this happens because you made a typo entering the artist or track name
+- There is also a chance lrclib.net does not have synced lyrics for a particular song. In that case there is not much you can do if you want time synced lyrics.
+
+**Audio and Lyrics out of Sync**
+- Happens sometimes when the script downloads an MP3 of a music video with extra fluff at the beginning.
+- The youtube_rip_script.py automatically downloads the shortest of the first 2 youtube results but you can broaden the search to choose the shortest of any amount of results on line 32 of the aforementioned yt script
