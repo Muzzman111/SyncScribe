@@ -2,7 +2,7 @@
 
 ## Project Description
 
-This project downloads time-stamped foreign language lyrics for any song, translates them into English using an AI model, and retrieves the corresponding MP3 from YouTube. The songs can then be played in the Quod Libet music player, with both the original and translated lyrics scrolling in sync. The lyrics are fetched using the lrclib.net API in LRC format, translation is powered by KoboldCPP running QWEN 2.5 7B, and yt-dlp is used to download the MP3s.
+This project downloads time-stamped foreign language lyrics for any song, translates them into English using an AI model, and retrieves the corresponding MP3 from YouTube. The songs can then be played in the Quod Libet music player, with both the original and translated lyrics scrolling in sync. The lyrics are fetched using the lrclib.net API in LRC format, translation is powered by KoboldCPP running QWEN 2.5 7B on your device, and yt-dlp is used to download the MP3s.
 
 ## Running the Script
 
@@ -116,4 +116,4 @@ This project downloads time-stamped foreign language lyrics for any song, transl
 
 **Audio and Lyrics out of Sync**
 - Happens sometimes when the script downloads an MP3 of a music video with extra fluff at the beginning.
-- The youtube_rip_script.py automatically downloads the shortest of the first 2 youtube results but you can broaden the search to choose the shortest of any amount of results on line 32 of the aforementioned yt script
+- The youtube_rip_script.py automatically downloads the shortest of the first 2 youtube results but you can broaden the search to choose the shortest of any amount of results on line 32 of the aforementioned script
