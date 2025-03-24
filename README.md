@@ -2,16 +2,16 @@
 
 ## Project Description
 
-This project downloads time-stamped, foreign language lyrics for any song, translates them into English using a AI model, and retrieves the corresponding MP3 from Youtube. The songs can then be played in the Quod Libet music player with both the original and translated lyrics scrolling in sync. The lrclib.net API is used to download the lyrics in an LRC format, KoboldCPP runs QWEN 2.5 7B for translation, and yt-dlp is used to download the MP3.
+This project downloads time-stamped foreign language lyrics for any song, translates them into English using an AI model, and retrieves the corresponding MP3 from YouTube. The songs can then be played in the Quod Libet music player, with both the original and translated lyrics scrolling in sync. The lyrics are fetched using the lrclib.net API in LRC format, translation is powered by KoboldCPP running QWEN 2.5 7B, and yt-dlp is used to download the MP3s.
 
 ## Running the Script
 
-1. **Start KoboldCPP server**  
+1. **Start KoboldCPP Server**
    - Launch KoboldCPP and click "Load" at the bottom of the window. 
    - Select your saved Kobold preset. (If you haven't set up a preset, refer to the "KoboldCPP Model Config" section.)
    - Click "Launch" to load the model weights and start the server.
 
-2. **Fill out list of songs to download and translate**  
+2. **Prepare the CSV File with Song Details**  
    - Open the music_data.csv file using Excel, Google Sheets, or your preferred spreadsheet tool.
    - Enter the details for each song you wish to download and translate
    - Ensure that all necessary fields are filled out for each song. Any missing artist or track will be skipped automatically.
