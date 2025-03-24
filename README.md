@@ -2,7 +2,7 @@
 
 ## Project Description
 
-This project downloads time-stamped, foreign language lyrics for any song, translates them into English using a AI model, and retrieves the corresponding MP3 from Youtube. The song can then be played in the Quod Libet music player with both the original and translated lyrics scrolling in sync. The lrclib.net API is used to download the lyrics in an LRC format, KoboldCPP runs QWEN 2.5 7B for translation, and yt-dlp is used to download the MP3.
+This project downloads time-stamped, foreign language lyrics for any song, translates them into English using a AI model, and retrieves the corresponding MP3 from Youtube. The songs can then be played in the Quod Libet music player with both the original and translated lyrics scrolling in sync. The lrclib.net API is used to download the lyrics in an LRC format, KoboldCPP runs QWEN 2.5 7B for translation, and yt-dlp is used to download the MP3.
 
 ## Running the Script
 
@@ -11,18 +11,21 @@ This project downloads time-stamped, foreign language lyrics for any song, trans
    - Select your saved Kobold preset. (If you haven't set up a preset, refer to the "KoboldCPP Model Config" section.)
    - Click "Launch" to load the model weights and start the server.
 
-2. **Navigate to the Script Folder**  
-   - Open your terminal and change directory into the project folder:  
-     ```
-     cd /SyncScribe
-     ```
+2. **Fill out list of songs to download and translate**  
+   - Open the music_data.csv file using Excel, Google Sheets, or your preferred spreadsheet tool.
+   - Enter the details for each song you wish to download and translate
+   - Ensure that all necessary fields are filled out for each song. Any missing artist or track will be skipped automatically.
 
 3. **Run the Script**  
-   - Execute the script with the following command:
-     ```
-     python "translate_lyrics_main_script.py" --artist "enter artist name" --track "enter track name" --language "enter the song language"
-     ```
-   - Note: The arguments `--artist` and `--track` are required, while `--language` is optional.
+   - Execute the script with the following command if you are using the music_data csv file:
+      ```
+      python "translate_lyrics_main_script.py" --file
+      ```
+   - Songs may be downloaded individually like this:
+      ```
+      python "translate_lyrics_main_script.py" --artist "enter artist name" --track "enter track name" --language "enter the song language"
+      ```
+   - Note: The arguments `--artist` and `--track` are required, while `--language` is optional but recommended.
 
 ## Windows Installation From Scratch
 

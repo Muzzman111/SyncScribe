@@ -5,6 +5,8 @@ import subprocess
 import argparse
 import threading
 import requests
+import csv
+
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")   # Setup logging
 
@@ -13,13 +15,15 @@ LRC_SCRIPT = r"./LRCLib_API.py"
 AUDIO_RIP_SCRIPT = r"./youtubedlp_rip_script.py"
 MP3_DIR = os.path.expandvars(r"%userprofile%\Music\Music with LRC Files")
 LYRICS_DIR = MP3_DIR
+MUSIC_DATA_PATH = r"./music_data.csv"
 
 def get_arguments():
     parser = argparse.ArgumentParser(description="Parse track info and language to translate")
     parser.add_argument('--artist', type=str, default="grupo frontera ", help="Name of the artist.")
     parser.add_argument('--track', type=str, default="un x100to", help="Name of the track.")
     parser.add_argument('--language', type=str, default="", help="Language to translate from.")
-    parser.add_argument('--retranslate', type=int, default=1, help="1 = retranslate always, 0 = use existing translation.")
+    parser.add_argument('--retranslate', type=int, default=0, help="1 = retranslate always, 0 = use existing translation. 2 = never run translation on english")
+    parser.add_argument('--file', action='store_true', help="Enable file loading mode")
     return parser.parse_args()
 
 def kobold_server_check():
@@ -70,11 +74,11 @@ def get_lyrics(artist, track, file_path, language):
         outer_data = json.loads(result.stdout)
         synced_str = outer_data.get("syncedLyrics", "")
         if not synced_str:
-            raise ValueError("Empty syncedLyrics from API.")
+            raise ValueError("Empty Lyrics from API.")
         inner_data = json.loads(synced_str)
         synced_lyrics = inner_data.get("syncedLyrics", "")
         if not synced_lyrics:
-            raise ValueError("Empty syncedLyrics in inner JSON.")
+            raise ValueError("Empty Lyrics in inner JSON.")
         logging.info("API request successful.")
         return synced_lyrics
     except (json.JSONDecodeError, ValueError) as e:
@@ -141,7 +145,7 @@ def process_lyrics(artist, track, language, retranslate):
     # Get original lyrics
     lyrics = get_lyrics(artist, track, file_path_OG, language)
     if not lyrics:
-        logging.error("Error: Lyrics not found. Exiting.")
+        logging.error(f"Error: Lyrics not found for {artist} - {track}. Exiting.")
         return None, None
 
     # Save original lyrics if needed
@@ -154,8 +158,17 @@ def process_lyrics(artist, track, language, retranslate):
     
     translated_file_path = os.path.join(MP3_DIR, f"{artist} - {track}.lrc")
     translated_lyrics = None
-    if not os.path.exists(translated_file_path) or retranslate:
-        translated_lyrics = translate_lyrics(lyrics, language)
+
+    if language.lower() == "english":
+        retranslate = 2
+
+    if retranslate == 1:
+        translated_lyrics = translate_lyrics(lyrics, language)      # Always retranslate
+    elif retranslate == 0:
+        if not os.path.exists(translated_file_path):        # Use existing translation if available, else translate
+            translated_lyrics = translate_lyrics(lyrics, language)
+    elif retranslate == 2:
+        logging.info("Translation skipped because language is English")     #never translate english
     
     if translated_lyrics and "Error:" not in translated_lyrics:
         save_file(translated_file_path, translated_lyrics)
@@ -165,20 +178,34 @@ def process_lyrics(artist, track, language, retranslate):
         logging.error("Error in translation.")
     
     download_thread.join()
-    logging.info("Script completed successfully.")
+    logging.info(f"Script completed successfully for {artist} - {track}.")
     return lyrics, translated_lyrics
 
 def main():
     if not kobold_server_check():
         logging.error("No kobold server available. Exiting.")
         return
+    
     args = get_arguments()
-    artist = args.artist.lower()
-    track = args.track.lower()
-    language = args.language
-    retranslate = args.retranslate
 
-    process_lyrics(artist, track, language, retranslate)
+    if args.file:
+        with open(MUSIC_DATA_PATH, "r", encoding="utf-8") as file:
+            reader = csv.DictReader(file)  # Reads CSV and converts rows into dictionaries
+            music_data = [row for row in reader]  # List of dictionaries
+            for data in music_data:
+                artist = data['Artist'].lower()
+                track = data['Track Name'].lower()
+                language = data['Language']
+                if not artist or not track:
+                    continue
+                process_lyrics(artist, track, language, 0)
+    else:
+        artist = args.artist.lower()
+        track = args.track.lower()
+        language = args.language
+        retranslate = args.retranslate
+
+        process_lyrics(artist, track, language, retranslate)
 
 if __name__ == "__main__":
     main()
