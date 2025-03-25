@@ -6,6 +6,7 @@ import argparse
 import threading
 import requests
 import csv
+import sys
 
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")   # Setup logging
@@ -19,10 +20,10 @@ MUSIC_DATA_PATH = r"./music_data.csv"
 
 def get_arguments():
     parser = argparse.ArgumentParser(description="Parse track info and language to translate")
-    parser.add_argument('--artist', type=str, default="grupo frontera ", help="Name of the artist.")
-    parser.add_argument('--track', type=str, default="un x100to", help="Name of the track.")
-    parser.add_argument('--language', type=str, default="", help="Language to translate from.")
-    parser.add_argument('--retranslate', type=int, default=0, help="1 = retranslate always, 0 = use existing translation. 2 = never run translation on english")
+    parser.add_argument('--artist', type=str, default="david bisbal", help="Name of the artist.")
+    parser.add_argument('--track', type=str, default="ave maría", help="Name of the track.")
+    parser.add_argument('--language', type=str, default="spanish", help="Language to translate from.")
+    parser.add_argument('--retranslate', type=int, default=1, help="1 = retranslate always, 0 = use existing translation. 2 = never run translation on english")
     parser.add_argument('--file', action='store_true', help="Enable file loading mode")
     return parser.parse_args()
 
@@ -88,13 +89,13 @@ def get_lyrics(artist, track, file_path, language):
 def translate_lyrics(lyrics, language):
     """Translates the provided lyrics into English while preserving timestamps."""
     prompt = (
-        f"Translate the following {language} song lyrics into English. Preserve the timestamps and ensure accuracy. "
+        f"Translate the following {language} song lyrics into English. Preserve the timestamps exactly as they appear, ensuring they remain correctly placed in the output. (Dont forget the timestamp in front of the first line!) "
         "Do not add any additional commentary. The output should end precisely when the song ends and always be in English.\n\n"
     )
     payload = {
         "prompt": f"<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n{prompt}{lyrics}\n<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
         "max_length": 3000,
-        "temperature": 0.25,
+        "temperature": 0.2,
         "trim_stop": True,
         "stop_sequence": ["<|eot_id|>", "<|endoftext|>"],
         "bypass_eos": False,
@@ -175,7 +176,8 @@ def process_lyrics(artist, track, language, retranslate):
     elif os.path.exists(translated_file_path):
         logging.info("Translated lyrics already exist, skipping translation.")
     else:
-        logging.error("Error in translation.")
+        if retranslate != 2:
+            logging.error("Error in translation.")
     
     download_thread.join()
     logging.info(f"Script completed successfully for {artist} - {track}.")
@@ -184,8 +186,8 @@ def process_lyrics(artist, track, language, retranslate):
 def main():
     if not kobold_server_check():
         logging.error("No kobold server available. Exiting.")
-        return
-    
+        sys.exit(1)  # Exit with a nonzero status to indicate an error
+
     args = get_arguments()
 
     if args.file:

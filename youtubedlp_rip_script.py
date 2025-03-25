@@ -12,8 +12,8 @@ override = None  # Allows choosing which video to download
 
 def get_arguments():
     parser = argparse.ArgumentParser(description="Download a track with yt-dlp.")
-    parser.add_argument('--artist', type=str, default="los primos del este", help="Name of the artist.")
-    parser.add_argument('--track', type=str, default="mami", help="Name of the track.")
+    parser.add_argument('--artist', type=str, default="calle 13", help="Name of the artist.")
+    parser.add_argument('--track', type=str, default="vamo animal", help="Name of the track.")
     parser.add_argument('--musicDir', type=str, default=music_dir, help="Directory to place MP3.")
     parser.add_argument('--language', type=str, default="spanish", help="Language to use.")
     return parser.parse_args()
@@ -29,7 +29,7 @@ def convert_duration_to_seconds(duration_str):
 def search_youtube(artist, track, wordforlyrics, override):
     query = f"{artist} {track} {wordforlyrics}"
     print(f"\nSearching YouTube for: {query}")
-    results = youtube_search.YoutubeSearch(query, max_results=2).to_dict()
+    results = youtube_search.YoutubeSearch(query, max_results=2).to_dict()   #change how many results to get from youtube
     
     if results:
         shortest_video = None
