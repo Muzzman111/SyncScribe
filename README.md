@@ -120,5 +120,5 @@ This project downloads time-stamped foreign language lyrics for any song or list
    - There is a txt in the plugins folder called "how to add or remove time from the start of an mp3.txt" that uses ffmpeg to cut or add time to a song to get it in sync with the lyrics.
 
 **LLM Screws up the Translation**
-   - Can happen if your song is too long for the context and it shifts your prompt out of context. The solution is to allocate more context in koboldcpp and the prompt variable in the main script.
+   - Can happen if your song is too long for the context and Kobold shifts your prompt out of the models awareness. The solution is to allocate more context in koboldcpp and the prompt variable in the main script.
    - Rarely, I have had the LLM make a mistake when translating and creating the lrc file and in that case just run the script again with the retranslate arguement set to 1.
