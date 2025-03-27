@@ -2,7 +2,7 @@
 
 ## Project Description
 
-This project downloads time-stamped foreign language lyrics for any song, translates them into English using an AI model, and retrieves the corresponding MP3 from YouTube. The songs can then be played in the Quod Libet music player, with both the original and translated lyrics scrolling in sync. The lyrics are fetched using the lrclib.net API in LRC format, translation is powered by KoboldCPP running QWEN 2.5 7B on your device, and yt-dlp is used to download the MP3s.
+This project downloads time-stamped foreign language lyrics for any song or list of songs, translates them into English using an AI model, and retrieves the corresponding MP3 from YouTube. The songs can then be played in the Quod Libet music player, with both the original and translated lyrics scrolling in sync. The lyrics are fetched using the lrclib.net API in LRC format, translation is powered by KoboldCPP running QWEN 2.5 7B on your device, and yt-dlp is used to download the MP3s.
 
 ## Running the Script
 
@@ -61,8 +61,7 @@ This project downloads time-stamped foreign language lyrics for any song, transl
    - Get the translation model from [Qwen2.5-7B-Instruct on Hugging Face](https://huggingface.co/Qwen/Qwen2.5-7B-Instruct-GGUF/tree/main).  
    - Note: LLAMA 3 models may refuse translation due to violent content in song lyrics, but QWEN 2.5 7B works flawlessly.  
    - I used the Q5_k_m quantization and it worked well.  
-   - If the model is split into multiple parts, ensure you download all of them.  
-   - You can place the model anywhere on your system.
+   - If the model is split into multiple parts, ensure you download all of them.
 
 ### One-time Configuration
 
@@ -108,12 +107,18 @@ This project downloads time-stamped foreign language lyrics for any song, transl
    - Click "Save Preset" at the bottom of the KoboldCPP window and save the configuration in the same folder as your model.  
    - This allows you to load the preset for future sessions without reconfiguring everything.
 
-### Troubleshooting
+### Known Issues
 
 **Error Downloading Lyrics**
-- Most of the time this happens because you made a typo entering the artist or track name
-- There is also a chance lrclib.net does not have synced lyrics for a particular song. In that case there is not much you can do if you want time synced lyrics.
+- This can happen if you misspell the artist or track name.
+- There is also a chance lrclib.net does not have synced lyrics for a particular song. In that case you would have to look somewhere else to find synced lyrics.
 
 **Audio and Lyrics out of Sync**
-- Happens sometimes when the script downloads an MP3 of a music video with extra fluff at the beginning.
-- The youtube_rip_script.py automatically downloads the shortest of the first 2 youtube results but you can broaden the search to choose the shortest of any amount of results on line 32 of the aforementioned script
+- Happens occasionally when the script downloads an MP3 of a music video with fluff at the beginning.
+- The youtube_rip_script.py automatically downloads the shortest video from the first two YouTube search results. However, you can modify the script to select a specific song or expand the search to consider more results. This can be adjusted on line 32 of the script.
+- There is a txt in the plugins folder called "how to add or remove time from the start of an mp3.txt" that uses ffmpeg to cut or add time to a song to get it in sync.
+
+**LLM Screws up the Translation**
+- Can happen if your song is too long for the context and it shifts your prompt out of context.
+ The solution is to allocate more context in koboldcpp and the prompt variable in the main script.
+ - Rarely, I have had the LLM make some kind of mistake in making the lrc file and in that case just run the command again with the retranslate arguement set to 1.

@@ -1,0 +1,6 @@
+Add Time to beginning of a song (milliseconds):
+ffmpeg -i "C:\Users\nmuzz\Music\natanael cano - pacas de billetes.mp3" -af "adelay=500|500" "C:\Users\nmuzz\Music\Music with LRC Files\natanael cano - pacas de billetes.mp3"
+
+Cut time from beginning (seconds):
+ffmpeg -i "C:\Users\nmuzz\Music\natanael cano - pacas de billetes.mp3" -ss 1.0 -c copy "C:\Users\nmuzz\Music\Music with LRC Files\natanael cano - pacas de billetes.mp3"
+

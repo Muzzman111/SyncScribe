@@ -22,7 +22,7 @@ def get_arguments():
     parser = argparse.ArgumentParser(description="Parse track info and language to translate")
     parser.add_argument('--artist', type=str, default="david bisbal", help="Name of the artist.")
     parser.add_argument('--track', type=str, default="ave maría", help="Name of the track.")
-    parser.add_argument('--language', type=str, default="spanish", help="Language to translate from.")
+    parser.add_argument('--language', type=str, default="spanish", help="Language of the track.")
     parser.add_argument('--retranslate', type=int, default=1, help="1 = retranslate always, 0 = use existing translation. 2 = never run translation on english")
     parser.add_argument('--file', action='store_true', help="Enable file loading mode")
     return parser.parse_args()
@@ -94,7 +94,7 @@ def translate_lyrics(lyrics, language):
     )
     payload = {
         "prompt": f"<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n{prompt}{lyrics}\n<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
-        "max_length": 3000,
+        "max_length": 3200,
         "temperature": 0.2,
         "trim_stop": True,
         "stop_sequence": ["<|eot_id|>", "<|endoftext|>"],
@@ -146,7 +146,7 @@ def process_lyrics(artist, track, language, retranslate):
     # Get original lyrics
     lyrics = get_lyrics(artist, track, file_path_OG, language)
     if not lyrics:
-        logging.error(f"Error: Lyrics not found for {artist} - {track}. Exiting.")
+        logging.error(f"Error: Synced lyrics not found for {artist} - {track}. Exiting.")
         return None, None
 
     # Save original lyrics if needed
@@ -191,6 +191,7 @@ def main():
     args = get_arguments()
 
     if args.file:
+        retranslate = args.retranslate
         with open(MUSIC_DATA_PATH, "r", encoding="utf-8") as file:
             reader = csv.DictReader(file)  # Reads CSV and converts rows into dictionaries
             music_data = [row for row in reader]  # List of dictionaries
@@ -200,12 +201,11 @@ def main():
                 language = data['Language']
                 if not artist or not track:
                     continue
-                process_lyrics(artist, track, language, 0)
+                process_lyrics(artist, track, language, retranslate)
     else:
         artist = args.artist.lower()
         track = args.track.lower()
         language = args.language
-        retranslate = args.retranslate
 
         process_lyrics(artist, track, language, retranslate)
 
