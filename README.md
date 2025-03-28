@@ -90,7 +90,7 @@ This project downloads time-stamped foreign language lyrics for any song or list
    - This allows you to load the preset for future sessions without reconfiguring everything.
 
 #### Quod Libet Dual Lyrics Plugin Config
-
+   Adding the modified plugin to Quod Libet allows you to view song lyrics side by side in both the original language and English.
 1. **Locate the Plugin Folder**  
    - Open File Explorer and navigate to the Quod Libet plugin folder. It is located at this path within the Quod Libet folder:  
      ```
@@ -106,7 +106,6 @@ This project downloads time-stamped foreign language lyrics for any song or list
 
 3. **Activate the Plugin**  
    - Open Quod Libet, navigate to **File > Plugins**, scroll down until you see "Synchronized Lyrics Dual Language," check the box, and close the dialog.  
-   - This plugin enables you to view lyrics in both languages while listening.
 
 ### Known Issues
 
