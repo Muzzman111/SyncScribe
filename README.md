@@ -89,7 +89,7 @@ This project downloads time-stamped foreign language lyrics for any song or list
    - Click "Save Preset" at the bottom of the KoboldCPP window and save the configuration in the same folder as your model.  
    - This allows you to load the preset for future sessions without reconfiguring everything.
 
-### Quod Libet Dual Lyrics Plugin Config
+#### Quod Libet Dual Lyrics Plugin Config
    Adding the modified plugin to Quod Libet allows you to view song lyrics side by side in both the original language and English.
 1. **Locate the Plugin Folder**  
    - Open File Explorer and navigate to the Quod Libet plugin folder. It is located at this path within the Quod Libet folder:  
