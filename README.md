@@ -65,25 +65,6 @@ This project downloads time-stamped foreign language lyrics for any song or list
 
 ### One-time Configuration
 
-#### Quod Libet Dual Lyrics Plugin Config
-
-1. **Locate the Plugin Folder**  
-   - Open File Explorer and navigate to the Quod Libet plugin folder. It is located at this path within the Quod Libet folder:  
-     ```
-     \quodlibet-4.6.0-portable\data\lib\python3.11\site-packages\quodlibet\ext\events
-     ```  
-     Or, if Quod Libet is in your Downloads folder, you can paste:  
-     ```
-     %userprofile%\Downloads\quodlibet-4.6.0-portable\data\lib\python3.11\site-packages\quodlibet\ext\events
-     ```
-
-2. **Copy the Plugin File**  
-   - Copy "SynchronizedLyricsDualLanguage.py" from the quod_libet_plugin/ folder into the events folder you opened in the previous step.
-
-3. **Activate the Plugin**  
-   - Open Quod Libet, navigate to **File > Plugins**, scroll down until you see "Synchronized Lyrics Dual Language," check the box, and close the dialog.  
-   - This plugin enables you to view lyrics in both languages while listening.
-
 #### KoboldCPP Model Config
 
 1. **Set Presets**  
@@ -108,6 +89,25 @@ This project downloads time-stamped foreign language lyrics for any song or list
    - Click "Save Preset" at the bottom of the KoboldCPP window and save the configuration in the same folder as your model.  
    - This allows you to load the preset for future sessions without reconfiguring everything.
 
+#### Quod Libet Dual Lyrics Plugin Config
+
+1. **Locate the Plugin Folder**  
+   - Open File Explorer and navigate to the Quod Libet plugin folder. It is located at this path within the Quod Libet folder:  
+     ```
+     \quodlibet-4.6.0-portable\data\lib\python3.11\site-packages\quodlibet\ext\events
+     ```  
+     Or, if Quod Libet is in your Downloads folder, you can paste:  
+     ```
+     %userprofile%\Downloads\quodlibet-4.6.0-portable\data\lib\python3.11\site-packages\quodlibet\ext\events
+     ```
+
+2. **Copy the Plugin File**  
+   - Copy "SynchronizedLyricsDualLanguage.py" from the quod_libet_plugin/ folder into the events folder you opened in the previous step.
+
+3. **Activate the Plugin**  
+   - Open Quod Libet, navigate to **File > Plugins**, scroll down until you see "Synchronized Lyrics Dual Language," check the box, and close the dialog.  
+   - This plugin enables you to view lyrics in both languages while listening.
+
 ### Known Issues
 
 **Error Downloading Lyrics**
@@ -121,5 +121,5 @@ This project downloads time-stamped foreign language lyrics for any song or list
 
 **LLM Screws up the Translation**
    - Can happen if your song is too long for the context and Kobold shifts your prompt out of the models awareness. The solution is to allocate more context in koboldcpp and the prompt variable in the main script.
-   - Happens when using too small of a model with poor prompt adherance.
+   - This can also occur when using too small of a model with poor prompt adherance.
    - If for any reason you want to retranslate and regenerate the lrc file, run the script with the retranslate arguement set to 1.
