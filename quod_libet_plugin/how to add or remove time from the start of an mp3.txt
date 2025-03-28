@@ -2,5 +2,5 @@ Add Time to beginning of a song (milliseconds):
 ffmpeg -i "input.mp3" -af "adelay=500|500" "output.mp3"
 
 Cut time from beginning (seconds):
-ffmpeg -i "input.mp3" -ss 3.0 -c copy "output.mp3"
+ffmpeg -i "input.mp3" -ss 0.5 -c copy "output.mp3"
 

@@ -121,4 +121,5 @@ This project downloads time-stamped foreign language lyrics for any song or list
 
 **LLM Screws up the Translation**
    - Can happen if your song is too long for the context and Kobold shifts your prompt out of the models awareness. The solution is to allocate more context in koboldcpp and the prompt variable in the main script.
-   - Rarely, I have had the LLM make a mistake when translating and creating the lrc file and in that case just run the script again with the retranslate arguement set to 1.
+   - Happens when using too small of a model with poor prompt adherance.
+   - If for any reason you want to retranslate and regenerate the lrc file, run the script with the retranslate arguement set to 1.

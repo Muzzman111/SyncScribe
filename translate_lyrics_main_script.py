@@ -23,7 +23,7 @@ def get_arguments():
     parser.add_argument('--artist', type=str, default="david bisbal", help="Name of the artist.")
     parser.add_argument('--track', type=str, default="ave maría", help="Name of the track.")
     parser.add_argument('--language', type=str, default="spanish", help="Language of the track.")
-    parser.add_argument('--retranslate', type=int, default=1, help="1 = retranslate always, 0 = use existing translation. 2 = never run translation on english")
+    parser.add_argument('--retranslate', type=int, default=0, help="1 = retranslate always, 0 = use existing translation. 2 = never run translation on english")
     parser.add_argument('--file', action='store_true', help="Enable file loading mode")
     return parser.parse_args()
 
@@ -94,7 +94,7 @@ def translate_lyrics(lyrics, language):
     )
     payload = {
         "prompt": f"<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n{prompt}{lyrics}\n<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
-        "max_length": 3200,
+        "max_length": 3000,
         "temperature": 0.2,
         "trim_stop": True,
         "stop_sequence": ["<|eot_id|>", "<|endoftext|>"],
