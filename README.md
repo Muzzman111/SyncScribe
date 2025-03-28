@@ -16,7 +16,6 @@ This project downloads time-stamped foreign language lyrics for any song or list
    - Open the music_data.csv file using Excel, Google Sheets, or your preferred spreadsheet tool.
    - Enter the details for each song you wish to download and translate
    - Note: English songs can be downloaded too. Translation will be automatically skipped if you fill out the language column of the csv with "english"
-   - Any song missing the artist or track name will be skipped.
 
 3. **Run the Script**  
    - Execute the script with the following command if you are using the music_data csv file:
@@ -94,7 +93,8 @@ This project downloads time-stamped foreign language lyrics for any song or list
      - Select "use CPU" if neither of the above options work.
 
 2. **Set Context**  
-   - Use the slider to set the "Context Size" to 6144. A smaller context may not be sufficient for longer songs.
+   - Use the slider to set the "Context Size" to 6144 or 8192. 
+   - Smaller context may not be sufficient for longer songs. The tradeoff is larger context runs slower.
 
 3. **Enable Memlock**  
    - Click on "Hardware" in the vertical menu on the left.  
