@@ -89,12 +89,12 @@ def get_lyrics(artist, track, file_path, language):
 def translate_lyrics(lyrics, language):
     """Translates the provided lyrics into English while preserving timestamps."""
     prompt = (
-        f"Translate the following {language} song lyrics into English. Preserve the timestamps exactly as they appear, ensuring they remain correctly placed in the output. (Dont forget the timestamp in front of the first line!) "
+        f"Translate the following {language} lyrics into English. Preserve the timestamps exactly as they appear, ensuring they remain correctly placed in the output. (Dont forget the timestamp in front of the first line!) "
         "Do not add any additional commentary. The output should end precisely when the song ends and always be in English.\n\n"
     )
     payload = {
         "prompt": f"<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n{prompt}{lyrics}\n<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
-        "max_length": 3000,
+        "max_length": 4000,
         "temperature": 0.2,
         "trim_stop": True,
         "stop_sequence": ["<|eot_id|>", "<|endoftext|>"],
@@ -189,9 +189,8 @@ def main():
         sys.exit(1)  # Exit with a nonzero status to indicate an error
 
     args = get_arguments()
-
+    retranslate = args.retranslate
     if args.file:
-        retranslate = args.retranslate
         with open(MUSIC_DATA_PATH, "r", encoding="utf-8") as file:
             reader = csv.DictReader(file)  # Reads CSV and converts rows into dictionaries
             music_data = [row for row in reader]  # List of dictionaries

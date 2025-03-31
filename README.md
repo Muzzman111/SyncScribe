@@ -74,7 +74,7 @@ This project downloads time-stamped foreign language lyrics for any song or list
      - Select "use CPU" if neither of the above options work.
 
 2. **Set Context**  
-   - Use the slider to set the "Context Size" to 6144 or 8192. 
+   - Use the slider to set the "Context Size" to 8192. 
    - Smaller context may not be sufficient for longer songs. The tradeoff is larger context runs slower.
 
 3. **Enable Memlock**  
